@@ -100,22 +100,21 @@ class TestProcessing:
     
     def preprocess(data):
         # print(data)
-        data = TestProcessing.remove_urls(data)
-        data = TestProcessing.convert_lower_case(data)
-        data = TestProcessing.remove_punctuation(data) #remove comma seperately
-        data = TestProcessing.remove_apostrophe(data)
-        data = TestProcessing.remove_stop_words(data)
-        #data = TestProcessing.convert_numbers(data)
-        # data = TestProcessing.stemming(data)
-        data = TestProcessing.wordNet_lemmatizer(data)
-        data = TestProcessing.remove_special_chars(data)
-        data = TestProcessing.remove_punctuation(data)
-        data = TestProcessing.convert_numbers(data)
-        data = TestProcessing.wordNet_lemmatizer(data)
-        # data = TestProcessing.stemming(data) #needed again as we need to stem the words
-        # data = TestProcessing.wordNet_lemmatizer(data)
-        data = TestProcessing.remove_punctuation(data) #needed again as num2word is giving few hypens and commas fourty-one
-        data = TestProcessing.remove_stop_words(data) #needed again as num2word is giving stop words 101 - one hundred and one
-        # print(data)
+#         print(type(data))
+        data = remove_urls(data)
+        data = convert_lower_case(data)
+#         data = remove_urls(data)
+        data = remove_punctuation(data) #remove comma seperately
+        data = remove_apostrophe(data)
+        data = remove_stop_words(data)
+        data = remove_special_chars(data)
+        data = convert_numbers(data)
+        data = wordNet_lemmatizer(data)
+        
+        data = remove_punctuation(data)
+        data = convert_numbers(data)
+        data = wordNet_lemmatizer(data)
+        data = remove_punctuation(data)
+        data = remove_stop_words(data)
         return data
     
