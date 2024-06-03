@@ -162,6 +162,7 @@ def add_query():
      top_k_doc_ids = [list(doc_set.keys())[idx] for idx in c3]
      # Print the top k document IDs
      print("Top k document IDs:")
+     sorted_docIds = np.array(list(doc_set.keys()))[c3]       
      for doc_id in top_k_doc_ids:
          print(doc_id)  
             
