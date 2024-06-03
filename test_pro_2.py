@@ -58,6 +58,15 @@ class TestProcessing:
     
     def remove_apostrophe(data):
         return np.char.replace(data, "'", "")
+    def remove_special_chars(data):
+         return re.sub(r'[^a-zA-Z0-9\s]', '', data)    
+   def remove_urls(data):
+      url_pattern = r'https?://(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)'
+    
+      if isinstance(data, bytes):
+          data = data.decode('utf-8')
+    
+      return re.sub(url_pattern, '', data, flags=re.IGNORECASE)    
     
     def stemming(data):
         stemmer= PorterStemmer()
@@ -91,6 +100,7 @@ class TestProcessing:
     
     def preprocess(data):
         # print(data)
+        data = TestProcessing.remove_urls(data)
         data = TestProcessing.convert_lower_case(data)
         data = TestProcessing.remove_punctuation(data) #remove comma seperately
         data = TestProcessing.remove_apostrophe(data)
@@ -98,8 +108,9 @@ class TestProcessing:
         #data = TestProcessing.convert_numbers(data)
         # data = TestProcessing.stemming(data)
         data = TestProcessing.wordNet_lemmatizer(data)
+        data = TestProcessing.remove_special_chars(data)
         data = TestProcessing.remove_punctuation(data)
-        #data = TestProcessing.convert_numbers(data)
+        data = TestProcessing.convert_numbers(data)
         data = TestProcessing.wordNet_lemmatizer(data)
         # data = TestProcessing.stemming(data) #needed again as we need to stem the words
         # data = TestProcessing.wordNet_lemmatizer(data)
